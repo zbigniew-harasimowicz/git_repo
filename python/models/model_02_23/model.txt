@@ -1,0 +1,42 @@
+Model z³o¿ony z 4 ukrytych warstw
+zawieraj¹cych kombinacjê linear,relu,sigmion,linear
+
+Doœæ du¿y owerfiting 
+ loss: 78.1905 - val_loss: 162.9949
+
+# Initialising the ANN
+PolutionModel = Sequential()
+
+
+PolutionModel.add(Dense(activation="relu", input_dim=7, units=15))
+PolutionModel.add(Dense(units = 15, activation = 'linear'))
+PolutionModel.add(Dense(units = 12, activation = 'relu'))
+PolutionModel.add(Dense(units = 10, activation = 'sigmoid'))
+PolutionModel.add(Dense(units = 10, activation = 'linear'))
+PolutionModel.add(Dense(units = 1, activation = 'linear'))
+
+PolutionModel.compile(optimizer = 'adam', loss = 'mean_squared_error')
+
+
+
+
+zwiêkszaj¹æ iloœæ neuronów w warstwie dostajemy jeszcze wiêkszy oweerfiting
+
+PolutionModel.add(Dense(activation="relu", input_dim=7, units=20))
+
+# Je¿eli wychodzi owerfiting mo¿emy zrbiæ dropouta
+#PolutionModel.add(Dropout(0.1))
+
+PolutionModel.add(Dense(units = 20, activation = 'relu'))
+PolutionModel.add(Dense(units = 20, activation = 'relu'))
+#PolutionModel.add(Dropout(0.1))
+PolutionModel.add(Dense(units = 20, activation = 'sigmoid'))
+PolutionModel.add(Dense(units = 10, activation = 'linear'))
+
+# Dodajemy ostatni¹ warstwê w naszym przypadku bêdzie to konkretna wartoæ wiêc jedna komórka
+
+PolutionModel.add(Dense(units = 1, activation = 'linear'))
+
+PolutionModel.compile(optimizer = 'adam', loss = 'mean_squared_error')
+
+Z owerfitingiem mo¿emy walczyæ poprzez
